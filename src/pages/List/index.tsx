@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-import { debounce } from 'ts-debounce'
-
 import axios from 'axios';
 
 import { UserItemProps } from './components/UserItem'

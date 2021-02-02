@@ -9,6 +9,7 @@ const Form: React.FC = ({ children }) => {
   const registerField = useCallback((data: FieldProps) => {
 
     setInputs((oldState) => {
+
       return [...oldState, data]
     })
 
