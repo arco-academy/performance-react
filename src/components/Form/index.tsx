@@ -1,10 +1,19 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, FormEvent } from 'react';
 
 import FormContext, { FieldProps } from './context'
 
-const Form: React.FC = ({ children }) => {
+interface InputValueProps {
+  value: string
+  name: string
+}
+interface FormProps {
+  onSubmit: (data: InputValueProps[]) => void
+}
 
-  const [, setInputs] = useState([] as FieldProps[])
+
+const Form: React.FC<FormProps> = ({ children, onSubmit }) => {
+
+  const [inputs, setInputs] = useState([] as FieldProps[])
 
   const registerField = useCallback((data: FieldProps) => {
 
@@ -15,8 +24,25 @@ const Form: React.FC = ({ children }) => {
 
   },[])
 
+  
+  const handleSubmit = useCallback((e: FormEvent) => {
+    e.preventDefault();
+
+    const values = inputs.map(input => ({
+      name: input.name,
+      value: input.ref.value
+    }))
+
+
+    onSubmit(values)
+
+    
+  },[inputs, onSubmit])
+
+
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <FormContext.Provider value={{ registerField }}>
         {children}
       </FormContext.Provider>

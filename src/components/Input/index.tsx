@@ -20,7 +20,7 @@ const Input: React.FC<InputProps> = ({ name, ...props }) => {
     })
   },[name, registerField])
 
-  return <input ref={inputRef} {...props}/>;
+  return <input ref={inputRef}  {...props}/>;
 }
 
 export default Input;
